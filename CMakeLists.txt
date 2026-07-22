@@ -53,6 +53,8 @@ juce_add_plugin(mvox
     COPY_PLUGIN_AFTER_BUILD TRUE
 )
 
+juce_generate_juce_header(mvox)
+
 target_sources(mvox PRIVATE ${SOURCES} ${HEADERS})
 target_compile_definitions(mvox PRIVATE
     JucePlugin_PluginName="mvox"
