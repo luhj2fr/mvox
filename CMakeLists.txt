@@ -65,6 +65,25 @@ target_compile_definitions(mvox PRIVATE
 # Enable C++20 and optimizations
 target_compile_features(mvox PRIVATE cxx_std_20)
 
+target_link_libraries(mvox
+    PRIVATE
+        juce::juce_audio_basics
+        juce::juce_audio_devices
+        juce::juce_audio_formats
+        juce::juce_audio_processors
+        juce::juce_audio_utils
+        juce::juce_core
+        juce::juce_data_structures
+        juce::juce_dsp
+        juce::juce_events
+        juce::juce_graphics
+        juce::juce_gui_basics
+        juce::juce_gui_extra
+    PUBLIC
+        juce::juce_recommended_config_flags
+        juce::juce_recommended_warning_flags
+)
+
 if(MSVC)
     target_compile_options(mvox PRIVATE /W4 /utf-8)
 endif()
