@@ -93,6 +93,14 @@ mvoxAudioProcessor::~mvoxAudioProcessor()
     apvts.removeParameterListener(deesserFreqId, this);
 }
 
+bool mvoxAudioProcessor::isBusesLayoutSupported(const BusesLayout& layouts) const
+{
+    if (layouts.getMainOutputChannelSet() != juce::AudioChannelSet::stereo()
+        && layouts.getMainOutputChannelSet() != juce::AudioChannelSet::mono())
+        return false;
+    return true;
+}
+
 void mvoxAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 {
     currentSampleRate = sampleRate;
@@ -242,6 +250,8 @@ void mvoxAudioProcessor::getStateInformation(juce::MemoryBlock& destData)
 
 void mvoxAudioProcessor::setStateInformation(const void* data, int sizeInBytes)
 {
+    if (data == nullptr || sizeInBytes <= 0)
+        return;
     std::unique_ptr<juce::XmlElement> xml(getXmlFromBinary(data, sizeInBytes));
     if (xml != nullptr)
         apvts.replaceState(juce::ValueTree::fromXml(*xml));
