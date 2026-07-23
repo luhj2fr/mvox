@@ -60,6 +60,7 @@ target_compile_definitions(mvox PRIVATE
     JucePlugin_PluginName="mvox"
     JucePlugin_ManufacturerCode=0x70726F64
     JucePlugin_PluginCode=0x6D766F78
+    JUCE_VST3_CAN_REPLACE_VST2=0
 )
 
 # Enable C++20 and optimizations
